@@ -21,6 +21,8 @@ def Player_Card_2():
   print(player_hand[2], "of", player_hand[3])
 def Player_Card_3():
   print(player_hand[4], "of", player_hand[5])
+def Player_Card_4():
+  print(player_hand[6], "of", player_hand[7]) 
 
 #print statements for dealer's cards
 def Dealer_Card_1():
@@ -29,12 +31,14 @@ def Dealer_Card_2():
   print(dealer_hand[2],"of",dealer_hand[3])
 def Dealer_Card_3():
   print(dealer_hand[4],'of',dealer_hand[5])
+def Dealer_Card_4():
+  print(dealer_hand[6],'of',dealer_hand[7])
 
 
    
 
 
-print("Welcome to Blackjack Bitch")
+print("Welcome to Blackjack")
 
 print("Dealing cards...")
 
@@ -60,13 +64,13 @@ while len(deck) > 0:
 
     if player_sum == 21 and dealer_sum != 21:
       print("Blackjack!")
-      pass
+      continue
     if player_sum == 21 and dealer_sum == 21:
      print("Tie for Blackjack. Dealer Wins")
-     pass
+     continue
     if player_sum != 21 and dealer_sum == 21:
       print("Dealer has Blackjack. Dealer Wins")
-      pass
+      continue
 
     
     print("\n")
@@ -79,17 +83,47 @@ while len(deck) > 0:
         Player_Card_3()
         player_sum += player_hand[4]
         print(f"Current Sum: {player_sum}")
+        print("\n")
         if player_sum == 21:
           print("Blackjack!")
-          pass
+          continue
         if player_sum > 21:
           print("Busted! Dealer wins")
-          pass
+          continue
     if first == "Stay":
-        continue
-    if dealer_sum <= 16:
+      pass
+    if dealer_sum < 16:
       print("Dealer under 16. Dealer takes the hit")
       dealer_hand += deck.pop()
+      dealer_sum += dealer_hand[4]
+      
+      print("\n")
+      print("Dealer's Hand:")
+      
+      Dealer_Card_1()
+      Dealer_Card_2()
+      Dealer_Card_3()
+      print(f"Current Sum: {dealer_sum}")
+    
+    if dealer_sum < 16:
+      print("Dealer under 16. Dealer takes the hit")
+      dealer_hand += deck.pop()
+      dealer_sum += dealer_hand[6]
+      
+      print("\n")
+      print("Dealer's Hand:")
+      Dealer_Card_1()
+      Dealer_Card_2()
+      Dealer_Card_3()
+      Dealer_Card_4()
+   
+    if dealer_sum > 16 and dealer_sum < 21:
+      print("Dealer is above 16. They stay")
+    if player_sum > dealer_sum:
+      print(f"{player_sum} beats {dealer_sum}. You win!")
+
+
+
 
 
 print("Run again to reshuffle deck")
